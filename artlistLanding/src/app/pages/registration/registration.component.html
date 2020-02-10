@@ -1,1 +1,28 @@
-<p>registration works!</p>
+<section class="registration">
+  <h2>Submit your music</h2>
+  <form [formGroup]="registrationsForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label>Name</label>
+      <input type="text" formControlName="artistName" class="form-control" [ngClass]="{ 'is-invalid': f.artistName.errors }" />
+      <div *ngIf="f.artistName.errors" class="invalid-feedback">
+        <div *ngIf="f.artistName.errors.required">Name is required</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Email</label>
+      <input type="text" formControlName="artistEmail" class="form-control" [ngClass]="{ 'is-invalid': f.artistEmail.errors }" />
+      <div *ngIf="f.artistEmail.errors" class="invalid-feedback">
+        <div *ngIf="f.artistEmail.errors.required">Email is required</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="form-check">
+        <input formControlName="country" type="checkbox" class="form-check-input">
+        <label class="form-check-label">Allow Export</label>
+      </div>
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary">Submit</button>
+    </div>
+  </form>
+</section>
