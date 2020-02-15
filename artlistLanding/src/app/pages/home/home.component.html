@@ -4,30 +4,24 @@
   </h1>
 </header>
 <main>
-  <section class="lpSection lpSection-one">
-    <div class="lpContent">
-      <h2 class="lpHeader">We want your inspiring music</h2>
-      <p class="lpText">
-        Get your music into films, videos & TV all around the world. Join Artlist family
-      </p>
-      <button type="button" (click)="scrollDown()">arrow</button>
-    </div>
-  </section>
   <section class="lpSection lpSection-two">
     <div class="lpContent">
       <h2 class="lpHeader">Things to check before we start</h2>
-      <ul class="lpText checkList">
-        <li>
+      <ul class="checkList">
+        <li class="lpText">
           You have full rights to the music
         </li>
-        <li>
+        <li class="lpText">
           The music can be used on any platform
         </li>
-        <li>
+        <li class="lpText">
           Your pres kit is complete with photos, bio and great
         </li>
       </ul>
-      <a class="btn tbn-yellow" [routerLink]="['/registration']">Start Now</a>
+      <a class="btn btn__yellow" [routerLink]="['/registration']">Start Now</a>
+    </div>
+    <div class="lpImage">
+      <img src="../../../assets/images/albums.png" alt="albums" />
     </div>
   </section>
 </main>

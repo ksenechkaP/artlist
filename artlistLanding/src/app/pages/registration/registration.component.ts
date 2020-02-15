@@ -2,36 +2,60 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
+interface Country {
+  value: string;
+  viewValue: string;
+}
+
 @Component({
   selector: 'app-registration',
-  templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.less']
+  templateUrl: './registration.component.html'
 })
 export class RegistrationComponent implements OnInit, OnDestroy {
   public registrationsForm: FormGroup;
   private subscription: Subscription;
+  isValid = false;
+
+  countries: Country[] = [
+   {value: 'IL', viewValue: 'Israel'},
+   {value: 'FR', viewValue: 'France'},
+   {value: 'IT', viewValue: 'Italy'}
+ ];
+
+ professions: Country[] = [
+  {value: 'singer', viewValue: 'singer'},
+  {value: 'compositor', viewValue: 'compositor'},
+  {value: 'artist', viewValue: 'artist'}
+];
 
   constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.registrationsForm = this.formBuilder.group({
            artistName: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(32)]],
-           artistEmail: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(280)]],
-           country: [false],
-           bio: [false],
-           profession: [false],
+           artistEmail: ['', [Validators.required, Validators.email]],
+           country: [''],
+           bio: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(250)]],
+           profession: ['', [Validators.required]],
            isPro: [false],
-           files: this.formBuilder.array([])
+           files: this.formBuilder.array([]),
+           fullRights: [false],
+           notUsed: [false],
+           clearForUse: ['', [Validators.required]]
        });
-
-
     // set values in local storage
-    this.subscription = this.registrationsForm.valueChanges.subscribe(formValue => {
+    this.subscription = this.registrationsForm.valueChanges.subscribe(() => {
         localStorage.setItem('formdata', JSON.stringify(this.registrationsForm.value));
       });
 
     if (localStorage.getItem('formdata')) {
        this.setSavedData();
+     }
+
+    if (this.registrationsForm.valid) {
+       this.isValid = true;
+     } else {
+       this.isValid = false;
      }
    }
 
@@ -87,5 +111,8 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     console.log('submitted form: ', this.registrationsForm);
   }
 
+  back() {
+
+  }
 
 }
