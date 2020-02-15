@@ -21,6 +21,15 @@
         <label class="form-check-label">Allow Export</label>
       </div>
     </div>
+    <div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (onFileDropped)="uploadFile($event)">
+      <input hidden type="file" #fileInput id="files" (change)="uploadFile($event.target.files)">
+    </div>
+    <div class="files-list" formArrayName="files" *ngFor="let file of files.controls;let i= index">
+      <p [formGroupName]="i"> {{ file.value.name }} </p>
+      <button class="delete-file" (click)="deleteAttachment(i)">
+        remove
+      </button>
+    </div>
     <div class="form-group">
       <button class="btn btn-primary">Submit</button>
     </div>

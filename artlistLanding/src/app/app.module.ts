@@ -5,12 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RegistrationComponent } from './pages/registration/registration.component';
 import { HomeComponent } from './pages/home/home.component';
+import { DragDropDirective } from './directories/drag-drop.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegistrationComponent,
-    HomeComponent
+    HomeComponent,
+    DragDropDirective
   ],
   imports: [
     BrowserModule,
